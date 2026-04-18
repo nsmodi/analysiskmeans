@@ -1,8 +1,8 @@
 Package: analysiskmeans
-Title: What the Package Does (One Line, Title Case)
+Title: This Package provides metrics and plots for a K Means Model
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Naamna", "Modi", , "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
