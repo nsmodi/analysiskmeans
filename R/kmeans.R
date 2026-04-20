@@ -6,7 +6,6 @@
 #' @param mat_norm A normalized matrix of the top x genes you want to analyze
 #'
 #' @return Resulting PCA matrix
-#' @export
 #' Conduct K Means Clustering
 #'
 #' @param max_k The max amount k value you wish to go up to

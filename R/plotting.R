@@ -1,13 +1,12 @@
-#' Conduct K Means Clustering
+#' Create an elbow plot
 #'
-#' @param mat_norm A normalized matrix of the top x genes you want to analyze
-#' @param max_k The max amount k value you wish to go up to
-#' @param pca_mat Resulting PCA matrix
-#' @param seed Random seed for reproducibility
-#' @param n_starts Number of initial sets
+#' @param metrics List of silhouette scores
+#' @return Resulting Elbow Plot
 #'
 #'
-#' @return PCA matrix
+#' @param selected_k Kmeans Value Selected
+#' @param km_list List of K Means clustering results with various K values
+#' @return Resulting Cluster Plot
 #' @export
 #'
 #'

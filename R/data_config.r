@@ -10,7 +10,6 @@
 #'
 #' Select n top variable genes and data configuration
 #'
-#' @export
 #'
 #'
 #' @param sce A SingleCellExperiment object
@@ -19,6 +18,15 @@
 #' @param counts_mat Matrix of counts resulting from data_config()
 #'
 #' @return Matrix of normalized top gene values
+#'
+#' Export tables of resulting metric data to files
+#' @param sce A SingleCellExperiment object
+#' @param cell_type Corresponding cell type labels
+#' @param km_list List of K Means clustering results with various K values
+#' @param selected_k Selected value of K for clustering
+#'
+#' @return None
+#'
 #' @export
 #'
 #' @examples
@@ -47,4 +55,21 @@ top_x_genes <- function(sce, counts_mat, n_top = 100, assay_name = "counts"){
   return(mat_norm)
 }
 
+export_files <- function(sce, cell_type, km_list, selected_k){
+  output_dir <- file.path(tempdir(), "kmeans_output")
+  dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+  km_sel <- km_list[[as.character(selected_k)]]
+  assignments <- data.frame(
+    cell_id   = colnames(sce),
+    cell_type = cell_type,
+    cluster   = km_sel$cluster
+  )
+  write.table(assignments, file.path(output_dir, "cluster_assignments.tsv"),
+              sep = "\t", row.names = FALSE, quote = FALSE)
+  write.table(metrics, file.path(output_dir, "kmeans_metrics.tsv"),
+              sep = "\t", row.names = FALSE, quote = FALSE)
+  write.table(evaluation, file.path(output_dir, "cluster_evaluation.tsv"),
+              sep = "\t", row.names = FALSE, quote = FALSE)
 
+  list.files(output_dir)
+  }

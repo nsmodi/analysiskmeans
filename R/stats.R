@@ -4,11 +4,10 @@
 #' @param pca_mat PCA matrix
 #' @param n_starts Number of initial sets
 #' @param max_k The max amount k value you wish to go up to
-#' @param metrics metrics about
+#' @param metrics List of silhouette scores
 #'
 #'
 #' @return Table of Gap statistic values for each K
-#' @export
 #'
 #' Compute ARI Values for each K
 #'

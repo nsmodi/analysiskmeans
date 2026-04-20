@@ -4,7 +4,7 @@ library(scuttle)
 library(cluster)
 library(ggplot2)
 # --- Load data ---
-sce <- BaronPancreasData("human")
+sce <- scRNAseq::BaronPancreasData("human")
 counts_mat <- counts(sce)
 cell_type <- colData(sce)$label
 # ============================================================================
