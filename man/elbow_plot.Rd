@@ -2,24 +2,22 @@
 % Please edit documentation in R/plotting.R
 \name{elbow_plot}
 \alias{elbow_plot}
-\title{Conduct K Means Clustering}
+\title{Create an elbow plot}
 \usage{
 elbow_plot(metrics)
 }
 \arguments{
-\item{mat_norm}{A normalized matrix of the top x genes you want to analyze}
+\item{metrics}{List of silhouette scores}
 
-\item{max_k}{The max amount k value you wish to go up to}
+\item{selected_k}{Kmeans Value Selected}
 
-\item{pca_mat}{Resulting PCA matrix}
-
-\item{seed}{Random seed for reproducibility}
-
-\item{n_starts}{Number of initial sets}
+\item{km_list}{List of K Means clustering results with various K values}
 }
 \value{
-PCA matrix
+Resulting Elbow Plot
+
+Resulting Cluster Plot
 }
 \description{
-Conduct K Means Clustering
+Create an elbow plot
 }

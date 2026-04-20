@@ -19,6 +19,7 @@ computepca(mat_norm)
 }
 \value{
 Resulting PCA matrix
+Conduct K Means Clustering
 
 Average silhouette scores
 

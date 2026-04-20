@@ -14,6 +14,12 @@ data_config(sce)
 \item{assay_name}{Name of assay to use (default: "counts")}
 
 \item{counts_mat}{Matrix of counts resulting from data_config()}
+
+\item{cell_type}{Corresponding cell type labels}
+
+\item{km_list}{List of K Means clustering results with various K values}
+
+\item{selected_k}{Selected value of K for clustering}
 }
 \value{
 A SingleCellExperiment subset to the top n_top variable genes as a matrix
@@ -25,6 +31,10 @@ Log Normalized SingleCellExperiment object
 Select n top variable genes and data configuration
 
 Matrix of normalized top gene values
+
+Export tables of resulting metric data to files
+
+None
 }
 \description{
 Configure and Normalize input data
