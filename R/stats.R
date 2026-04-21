@@ -8,7 +8,20 @@
 #'
 #'
 #' @return Table of Gap statistic values for each K
+#' @export
 #'
+
+
+
+gap_statistic <- function(pca_mat, n_starts, max_k, metrics){
+  gap_stat <- cluster::clusGap(pca_mat, FUN = stats::kmeans, nstart = n_starts,
+                      K.max = max_k, B = 20)
+  gap_tab <- as.data.frame(gap_stat$Tab)
+  metrics$gap <- gap_tab$gap[5:max_k]
+  metrics$gap_se <- gap_tab$SE.sim[5:max_k]
+
+  return(gap_tab)
+}
 #' Compute ARI Values for each K
 #'
 #' @param max_k The max amount k value you wish to go up to
@@ -17,18 +30,6 @@
 #'
 #' @return ARI values for each K
 #' @export
-
-
-gap_statistic <- function(pca_mat, n_starts, max_k, metrics){
-  gap_stat <- clusGap(pca_mat, FUN = kmeans, nstart = n_starts,
-                      K.max = max_k, B = 20)
-  gap_tab <- as.data.frame(gap_stat$Tab)
-  metrics$gap <- gap_tab$gap[5:max_k]
-  metrics$gap_se <- gap_tab$SE.sim[5:max_k]
-
-  return(gap_tab)
-}
-
 evaluation_metrics <- function(max_k, km_list, cell_type){
   evaluation <- data.frame(k = 5:max_k, ari = NA_real_)
   for (k in 5:max_k) {

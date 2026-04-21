@@ -14,17 +14,9 @@ gap_statistic(pca_mat, n_starts, max_k, metrics)
 \item{max_k}{The max amount k value you wish to go up to}
 
 \item{metrics}{List of silhouette scores}
-
-\item{km_list}{List of K Means clustering results with various K values}
-
-\item{cell_type}{Corresponding cell type labels}
 }
 \value{
 Table of Gap statistic values for each K
-
-Compute ARI Values for each K
-
-ARI values for each K
 }
 \description{
 Compute Gap Statistic for each K

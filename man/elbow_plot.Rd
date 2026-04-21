@@ -8,15 +8,9 @@ elbow_plot(metrics)
 }
 \arguments{
 \item{metrics}{List of silhouette scores}
-
-\item{selected_k}{Kmeans Value Selected}
-
-\item{km_list}{List of K Means clustering results with various K values}
 }
 \value{
 Resulting Elbow Plot
-
-Resulting Cluster Plot
 }
 \description{
 Create an elbow plot

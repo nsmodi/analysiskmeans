@@ -8,22 +8,9 @@ computepca(mat_norm)
 }
 \arguments{
 \item{mat_norm}{A normalized matrix of the top x genes you want to analyze}
-
-\item{max_k}{The max amount k value you wish to go up to}
-
-\item{n_starts}{Number of initial sets}
-
-\item{seed}{Random seed for reproducibility}
-
-\item{pca_mat}{Resulting PCA matrix}
 }
 \value{
 Resulting PCA matrix
-Conduct K Means Clustering
-
-Average silhouette scores
-
-List of K Means clustering results with various K values
 }
 \description{
 Compute Principal Component Analysis

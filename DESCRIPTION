@@ -11,6 +11,15 @@ RoxygenNote: 7.3.3
 URL: https://github.com/nsmodi/analysiskmeans
 BugReports: https://github.com/nsmodi/analysiskmeans/issues
 Imports: 
+    BiocGenerics,
+    BiocManager,
+    cluster,
     ggplot2,
+    scuttle,
     SingleCellExperiment,
-    SummarizedExperiment
+    stats,
+    SummarizedExperiment,
+    utils
+Depends: 
+    R (>= 3.5)
+LazyData: true
