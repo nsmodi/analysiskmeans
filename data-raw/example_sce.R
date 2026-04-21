@@ -1,50 +1,33 @@
 ## code to prepare `example_sce` dataset goes here
 library(SummarizedExperiment)
 library(SingleCellExperiment)
+
+#Example taken from https://inbre.ncgr.org/single-cell-workshop/bioconductor-singlecellexperiment.html documentation
+#I will customize this later I just want to see if it will work first
 set.seed(42)
+num_genes <- 12
+num_cells <- 8
+raw_counts <- as.integer(rexp(num_genes*num_cells, rate = 0.5))
+raw_counts <- matrix(raw_counts, nrow = num_genes, ncol = num_cells)
 
-# 10000 genes, 8 samples
-n_genes <- 10000
-n_samples <- 8
 
-# Simulate counts (negative binomial-ish)
-counts <- matrix(
-  rpois(n_genes * n_samples, lambda = 100),
-  nrow = n_genes,
-  ncol = n_samples
+#---
+gene_metadata <- data.frame(
+  name = paste("Gene", 1:num_genes, sep = "_"),
+  length = as.integer(rnorm(num_genes, mean = 10000, sd = 500))
 )
-rownames(counts) <- paste0("gene", seq_len(n_genes))
-colnames(counts) <- paste0("sample", seq_len(n_samples))
-
-# Add some structure: first 200 genes differ by treatment
-treatment <- rep(c("control", "treated"), each = 4)
-counts[1:200, treatment == "treated"] <- counts[1:200, treatment == "treated"] * 2
-
-# Sample metadata
-sample_data <- data.frame(
-  sample_id = colnames(counts),
-  treatment = treatment,
-  batch = rep(c("A", "B"), times = 4),
-  row.names = colnames(counts)
+cell_metadata <- data.frame(
+  name = paste("Cell", 1:num_cells, sep = "_"),
+  batch = rep(1:2, each = num_cells/2),
+  tissue = rep(c("xylem", "phloem"), times = num_cells/2)
 )
 
-# Gene metadata
-gene_data <- data.frame(
-  gene_id = rownames(counts),
-  gene_symbol = paste0("SYM", seq_len(n_genes)),
-  row.names = rownames(counts)
+example_sce <- SingleCellExperiment(
+  assays = list(counts = raw_counts), # wrap in a list
+  rowData = gene_metadata,
+  colData = cell_metadata,
+  metadata = list(name = "Fake SCE")
 )
-
-# Create SummarizedExperiment
-example_se <- SummarizedExperiment(
-  assays = list(counts = counts),
-  colData = sample_data,
-  rowData = gene_data
-)
-
-#Using SummarizedExperiment code from documentation and coercing to SingleCellExperiment type
-
-example_sce <- as(example_se, "SingleCellExperiment")
 
 usethis::use_data(example_sce, overwrite = TRUE)
 
