@@ -24,8 +24,7 @@ computepca <- function(mat_norm){
 #' @param pca Resulting PCA matrix
 #'
 #'
-#' @return Average silhouette scores
-#' @return List of K Means clustering results with various K values
+#' @return List Average silhouette scores and of K Means clustering results with various K values
 #' @export
 
 k_means <- function(max_k, n_starts = 25, seed = 42, pca){

@@ -4,9 +4,7 @@
 #'
 #' @param sce A SingleCellExperiment object
 #'
-#' @return A SingleCellExperiment subset to the top n_top variable genes as a matrix
-#' @return Corresponding cell type labels
-#' @return Log Normalized SingleCellExperiment object
+#' @return List of A SingleCellExperiment subset, List of cell type labels and Log Normalized SingleCellExperiment object
 #'
 #' @export
 #'

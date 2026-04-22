@@ -4,7 +4,7 @@
 \alias{k_means}
 \title{Conduct K Means Clustering}
 \usage{
-k_means(max_k, n_starts = 25, seed = 42, pca_mat)
+k_means(max_k, n_starts = 25, seed = 42, pca)
 }
 \arguments{
 \item{max_k}{The max amount k value you wish to go up to}
@@ -13,7 +13,7 @@ k_means(max_k, n_starts = 25, seed = 42, pca_mat)
 
 \item{seed}{Random seed for reproducibility}
 
-\item{pca_mat}{Resulting PCA matrix}
+\item{pca}{Resulting PCA matrix}
 }
 \value{
 Average silhouette scores
