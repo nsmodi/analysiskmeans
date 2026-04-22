@@ -23,7 +23,7 @@ data_config <- function(sce){
   #return(counts_mat)
   #return(cell_type)
   #return(sce)
-  return(list(1=counts_mat, 2=cell_type, 3=sce))
+  return(list("counts_mat"=counts_mat, "cell_type"=cell_type, "sce"=sce))
 }
 
 #' Select n top variable genes and data configuration
