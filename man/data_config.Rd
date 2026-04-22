@@ -10,11 +10,7 @@ data_config(sce)
 \item{sce}{A SingleCellExperiment object}
 }
 \value{
-A SingleCellExperiment subset to the top n_top variable genes as a matrix
-
-Corresponding cell type labels
-
-Log Normalized SingleCellExperiment object
+List of A SingleCellExperiment subset, List of cell type labels and Log Normalized SingleCellExperiment object
 }
 \description{
 Configure and Normalize input data

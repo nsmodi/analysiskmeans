@@ -16,9 +16,7 @@ k_means(max_k, n_starts = 25, seed = 42, pca)
 \item{pca}{Resulting PCA matrix}
 }
 \value{
-Average silhouette scores
-
-List of K Means clustering results with various K values
+List Average silhouette scores and of K Means clustering results with various K values
 }
 \description{
 Conduct K Means Clustering
