@@ -4,13 +4,13 @@ test_that("computepca returns correct structure and type", {
   sce <- example_sce
   results <- analysiskmeans::data_config(sce)
   sce <- results$sce
-  mat_norm <- analysiskmeans::top_x_genes(sce, n_top = 50)
-  pca <- computepca(mat_norm)
+  mat_norm <- analysiskmeans::top_x_genes(sce)
+  pca <- analysiskmeans::computepca(mat_norm)
   expect_s3_class(pca, "prcomp")
   expect_type(pca, "list")
 })
 #Test kmeans
-test_that("Kmeans returns correct structure with max_k of 10", {
+test_that("Kmeans returns correct structure with max_k of ", {
   utils::data(example_sce, package="analysiskmeans")
   sce <- example_sce
   results <- analysiskmeans::data_config(sce)
