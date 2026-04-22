@@ -19,10 +19,6 @@ data_config <- function(sce){
   colnames(SummarizedExperiment::colData(sce)) <- "cell_type"
   counts_mat <- SingleCellExperiment::counts(sce)
   sce <- scuttle::logNormCounts(sce)
-
-  #return(counts_mat)
-  #return(cell_type)
-  #return(sce)
   return(list("counts_mat"=counts_mat, "cell_type"=cell_type, "sce"=sce))
 }
 
