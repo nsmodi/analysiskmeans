@@ -20,9 +20,10 @@ data_config <- function(sce){
   counts_mat <- SingleCellExperiment::counts(sce)
   sce <- scuttle::logNormCounts(sce)
 
-  return(counts_mat)
-  return(cell_type)
-  return(sce)
+  #return(counts_mat)
+  #return(cell_type)
+  #return(sce)
+  return(list(1=counts_mat, 2=cell_type, 3=sce))
 }
 
 #' Select n top variable genes and data configuration
