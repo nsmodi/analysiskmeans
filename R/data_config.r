@@ -15,7 +15,7 @@
 data_config <- function(sce){
   SummarizedExperiment::assays(sce) <- list(counts = SingleCellExperiment::counts(sce))
   cell_type <- SummarizedExperiment::colData(sce)$label
-  SummarizedExperiment::colData(sce) <- SummarizedExperiment::colData(sce)[, "label", drop = FALSE]
+  #SummarizedExperiment::colData(sce) <- SummarizedExperiment::colData(sce)[, "label", drop = FALSE]
   colnames(SummarizedExperiment::colData(sce)) <- "cell_type"
   counts_mat <- SingleCellExperiment::counts(sce)
   sce <- scuttle::logNormCounts(sce)
