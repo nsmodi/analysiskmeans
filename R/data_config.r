@@ -36,17 +36,6 @@ data_config <- function(sce){
 #' @importFrom BiocGenerics var
 #' @export
 
-#@examples
-#' #Assuming 'sce' is a SingleCellExperiment object
-#' install.packages("BiocManager")
-#' BiocManager::install("airway")
-#' library(airway)
-#' airway_data <- data(BiocManager::airway)
-#' airway_data <- as(airway_data, "SingleCellExperiment")
-#'
-#' top_genes <- top_x_genes(airway_data, n_top=100)
-#'
-
 
 top_x_genes <- function(sce, n_top = 100, assay_name = "counts"){
   counts_mat <- SingleCellExperiment::counts(sce)

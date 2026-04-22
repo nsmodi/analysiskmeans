@@ -12,9 +12,8 @@
 
 computepca <- function(mat_norm){
   pca <- stats::prcomp(t(mat_norm), scale. = TRUE, center = TRUE)
-  pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
   return(pca)
-  return(pca_mat)
+
 }
 
 #' Conduct K Means Clustering
@@ -22,14 +21,15 @@ computepca <- function(mat_norm){
 #' @param max_k The max amount k value you wish to go up to
 #' @param n_starts Number of initial sets
 #' @param seed Random seed for reproducibility
-#' @param pca_mat Resulting PCA matrix
+#' @param pca Resulting PCA matrix
 #'
 #'
 #' @return Average silhouette scores
 #' @return List of K Means clustering results with various K values
 #' @export
 
-k_means <- function(max_k, n_starts = 25, seed = 42, pca_mat){
+k_means <- function(max_k, n_starts = 25, seed = 42, pca){
+  pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
   metrics <- data.frame(k = 5:max_k, wss = NA_real_, avg_silhouette = NA_real_)
   km_list <- list()
   for (k in 5:max_k) {
@@ -39,8 +39,7 @@ k_means <- function(max_k, n_starts = 25, seed = 42, pca_mat){
     sil <- cluster::silhouette(km$cluster, stats::dist(pca_mat))
     metrics$avg_silhouette[k - 1] <- mean(sil[, "sil_width"])
   }
-  return(metrics)
-  return(km_list)
+  return(list("metrics" = metrics, "km_list" = km_list))
 }
 
 
