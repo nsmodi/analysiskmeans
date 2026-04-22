@@ -5,9 +5,10 @@ library(SingleCellExperiment)
 #Example taken from https://inbre.ncgr.org/single-cell-workshop/bioconductor-singlecellexperiment.html documentation
 #I will customize this later I just want to see if it will work first
 set.seed(42)
-num_genes <- 12
-num_cells <- 8 #Used to be 8
-raw_counts <- as.integer(rexp(num_genes*num_cells, rate = 0.5))
+num_genes <- 100
+num_cells <- 20 #Used to be 8
+raw_counts <- as.integer(rexp(num_genes*num_cells, rate = 0.1))
+#raw_counts <- as.integer(runif(num_genes*num_cells, min = 1, max = 20))
 raw_counts <- matrix(raw_counts, nrow = num_genes, ncol = num_cells)
 
 
