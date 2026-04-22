@@ -12,8 +12,8 @@
 
 computepca <- function(mat_norm){
   pca <- stats::prcomp(t(mat_norm), scale. = TRUE, center = TRUE)
-  pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
-  return(list("pca" = pca, "pca_mat" = pca_mat))
+
+  return(pca)
 }
 
 #' Conduct K Means Clustering
@@ -27,17 +27,20 @@ computepca <- function(mat_norm){
 #' @return List Average silhouette scores and of K Means clustering results with various K values
 #' @export
 
-k_means <- function(max_k, n_starts = 25, seed = 42, pca_mat){
-
+k_means <- function(min_k, max_k, n_starts = 25, seed = 42, pca){
+  pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
   metrics <- data.frame(k = 5:max_k, wss = NA_real_, avg_silhouette = NA_real_)
   km_list <- list()
-  for (k in 5:max_k) {
+
+  #---
+  for (k in min_k:max_k) {
     km <- stats::kmeans(pca_mat, centers = k, nstart = n_starts)
     km_list[[as.character(k)]] <- km
-    metrics$wss[k - 1] <- km$tot.withinss # Total within-cluster sum of squares
+    metrics$wss[k - min_k + 1] <- km$tot.withinss
     sil <- cluster::silhouette(km$cluster, stats::dist(pca_mat))
-    metrics$avg_silhouette[k - 1] <- mean(sil[, "sil_width"])
+    metrics$avg_silhouette[k - min_k + 1] <- mean(sil[, "sil_width"])
   }
+  #---
   return(list("metrics" = metrics, "km_list" = km_list))
 }
 

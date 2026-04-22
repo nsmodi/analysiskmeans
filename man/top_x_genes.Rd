@@ -19,3 +19,7 @@ Matrix of normalized top gene values
 \description{
 Select n top variable genes and data configuration
 }
+\examples{
+library(analysiskmeans)
+data("example_sce")
+}

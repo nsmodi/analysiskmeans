@@ -33,12 +33,15 @@ data_config <- function(sce){
 #' @importFrom SingleCellExperiment logcounts
 #' @importFrom BiocGenerics var
 #' @export
+#' @examples
+#' library(analysiskmeans)
+#' data("example_sce")
 
 
 top_x_genes <- function(sce, n_top = 100, assay_name = "counts"){
   counts_mat <- SingleCellExperiment::counts(sce)
   gene_vars <- apply(counts_mat, 1, BiocGenerics::var) #fetch this from data_config
-  top_idx <- order(gene_vars, decreasing = TRUE)[seq_len(2000)]
+  top_idx <- order(gene_vars, decreasing = TRUE)[seq_len(n_top)]
   mat_norm <- as.matrix(SingleCellExperiment::logcounts(sce)[top_idx, ])
   return(mat_norm)
 }
