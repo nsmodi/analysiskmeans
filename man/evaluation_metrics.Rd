@@ -4,7 +4,7 @@
 \alias{evaluation_metrics}
 \title{Compute ARI Values for each K}
 \usage{
-evaluation_metrics(max_k, km_list, cell_type)
+evaluation_metrics(min_k, max_k, km_list, cell_type)
 }
 \arguments{
 \item{max_k}{The max amount k value you wish to go up to}

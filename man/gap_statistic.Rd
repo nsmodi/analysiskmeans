@@ -4,16 +4,16 @@
 \alias{gap_statistic}
 \title{Compute Gap Statistic for each K}
 \usage{
-gap_statistic(pca_mat, n_starts, max_k, metrics)
+gap_statistic(pca, n_starts = 25, max_k, metrics)
 }
 \arguments{
-\item{pca_mat}{PCA matrix}
-
 \item{n_starts}{Number of initial sets}
 
 \item{max_k}{The max amount k value you wish to go up to}
 
 \item{metrics}{List of silhouette scores}
+
+\item{pca_mat}{PCA matrix}
 }
 \value{
 Table of Gap statistic values for each K

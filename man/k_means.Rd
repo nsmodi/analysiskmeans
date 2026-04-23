@@ -4,7 +4,7 @@
 \alias{k_means}
 \title{Conduct K Means Clustering}
 \usage{
-k_means(max_k, n_starts = 25, seed = 42, pca_mat)
+k_means(min_k, max_k, n_starts = 25, seed = 42, pca)
 }
 \arguments{
 \item{max_k}{The max amount k value you wish to go up to}
