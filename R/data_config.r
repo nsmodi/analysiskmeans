@@ -12,7 +12,7 @@
 
 data_config <- function(sce){
   SummarizedExperiment::assays(sce) <- list(counts = SingleCellExperiment::counts(sce))
-  cell_type <- SummarizedExperiment::colData(sce)$label
+  cell_type <- SummarizedExperiment::colData(sce)['label']
   #SummarizedExperiment::colData(sce) <- SummarizedExperiment::colData(sce)[, "label", drop = FALSE]
   colnames(SummarizedExperiment::colData(sce)) <- "cell_type"
   counts_mat <- SingleCellExperiment::counts(sce)
@@ -59,11 +59,11 @@ top_x_genes <- function(sce, n_top = 100, assay_name = "counts"){
 #' @export
 
 export_files <- function(sce, cell_type, km_list, selected_k, metrics, evaluation){
-  output_dir <- file.path(tempdir(), "kmeans_output")
+  output_dir <- file.path(getwd(), "kmeans_output")
   dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
   km_sel <- km_list[[as.character(selected_k)]]
   assignments <- data.frame(
-    cell_id   = colnames(sce),
+    cell_id   = colnames(SummarizedExperiment::colData(sce)),
     cell_type = cell_type,
     cluster   = km_sel$cluster
   )

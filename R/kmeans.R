@@ -29,7 +29,7 @@ computepca <- function(mat_norm){
 
 k_means <- function(min_k, max_k, n_starts = 25, seed = 42, pca){
   pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
-  metrics <- data.frame(k = 5:max_k, wss = NA_real_, avg_silhouette = NA_real_)
+  metrics <- data.frame(k = min_k:max_k, wss = NA_real_, avg_silhouette = NA_real_)
   km_list <- list()
 
   #---

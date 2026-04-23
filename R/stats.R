@@ -13,7 +13,8 @@
 
 
 
-gap_statistic <- function(pca_mat, n_starts, max_k, metrics){
+gap_statistic <- function(pca, n_starts=25, max_k, metrics){
+  pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering
   gap_stat <- cluster::clusGap(pca_mat, FUN = stats::kmeans, nstart = n_starts,
                       K.max = max_k, B = 20)
   gap_tab <- as.data.frame(gap_stat$Tab)
@@ -30,11 +31,11 @@ gap_statistic <- function(pca_mat, n_starts, max_k, metrics){
 #'
 #' @return ARI values for each K
 #' @export
-evaluation_metrics <- function(max_k, km_list, cell_type){
-  evaluation <- data.frame(k = 5:max_k, ari = NA_real_)
-  for (k in 5:max_k) {
+evaluation_metrics <- function(min_k,max_k, km_list, cell_type){
+  evaluation <- data.frame(k = min_k:max_k, ari = NA_real_)
+  for (k in min_k:max_k) {
     pred <- km_list[[as.character(k)]]$cluster
-    tab <- table(cell_type, pred)
+    tab <- table(unlist(cell_type), pred)
     n <- sum(tab)
     sum_comb <- function(x) x * (x - 1) / 2
     sum_rows <- sum(sum_comb(rowSums(tab)))
@@ -43,7 +44,7 @@ evaluation_metrics <- function(max_k, km_list, cell_type){
     expected <- sum_rows * sum_cols / sum_comb(n)
     max_index <- (sum_rows + sum_cols) / 2
     ari <- if (max_index == expected) 0 else (sum_all - expected) / (max_index - expected)
-    evaluation$ari[k - 1] <- ari
-    return(evaluation)
+    evaluation$ari[k - min_k + 1] <- ari
   }
+  return(evaluation)
 }

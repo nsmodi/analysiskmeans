@@ -17,9 +17,9 @@ gene_metadata <- data.frame(
   length = as.integer(rnorm(num_genes, mean = 10000, sd = 500))
 )
 cell_metadata <- data.frame(
-  name = paste("Cell", 1:num_cells, sep = "_"),
+  names = paste("Cell", 1:num_cells, sep = "_"),
   batch = rep(1:2, each = num_cells/2),
-  tissue = rep(c("xylem", "phloem"), times = num_cells/2)
+  label = rep(c("xylem", "phloem"), times = num_cells/2)
 )
 
 example_sce <- SingleCellExperiment(

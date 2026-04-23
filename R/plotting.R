@@ -8,7 +8,9 @@
 
 
 elbow_plot <- function(metrics){
-  p_elbow <- ggplot2::ggplot(metrics, ggplot2::aes(x = metrics$k, y = metrics$wss)) +
+  k_vals <- metrics$k
+  wss_vals <- metrics$wss
+  p_elbow <- ggplot2::ggplot(metrics, ggplot2::aes(x = k_vals, y = wss_vals)) +
   ggplot2::geom_line() + ggplot2::geom_point(size = 2) +
   ggplot2::theme_bw(base_size = 14) +
   ggplot2::labs(x = "Number of Clusters (k)",
