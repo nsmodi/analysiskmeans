@@ -15,9 +15,9 @@ export_files(sce, cell_type, km_list, selected_k, metrics, evaluation)
 
 \item{selected_k}{Selected value of K for clustering}
 
-\item{evaluation}{ARI values for each K}
+\item{metrics}{Silhouette scores}
 
-\item{Metrics}{Silhouette scores}
+\item{evaluation}{ARI values for each K}
 }
 \value{
 None

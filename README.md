@@ -5,10 +5,12 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/nsmodi/analysiskmeans/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nsmodi/analysiskmeans/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/nsmodi/analysiskmeans/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/nsmodi/analysiskmeans/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 The goal of analysiskmeans is to perform a K Means Clustering on a
-Single Cell Experiment data object.
+Single Cell Experiment data object!
 
 ## Installation
 
@@ -27,35 +29,111 @@ Or you can also …
 # remotes::install_github("nsmodi/analysiskmeans")
 ```
 
-## Example
+## Example: data_config()
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(analysiskmeans)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+This is a basic example of how to use the data_config function to set up
+your SingleCellExperiment data so that it is usable for functionality in
+this package!
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+  library(analysiskmeans)
+  utils::data(example_sce, package="analysiskmeans")
+  sce <- example_sce
+  results <- data_config(sce)
+  sce <- results$sce
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+## Example: top_x_genes()
 
-You can also embed plots, for example:
+Next, we can take a look creating a subset of our data including a
+particular number of top selected genes! Keep in mind that if you do not
+fill in a parameter value for n_top, 50 will be the default value. A
+small portion of this subset is shown below.
 
-<img src="man/figures/README-pressure-1.png" alt="" width="100%" />
+``` r
+  utils::data(example_sce, package="analysiskmeans")
+  sce <- example_sce
+  results <- data_config(sce)
+  sce <- results$sce
+  mat_norm <- top_x_genes(sce, n_top = 50)
+mat_norm[1:5,1:5]
+```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+    ##          [,1]     [,2]     [,3]     [,4]     [,5]
+    ## [1,] 6.291017 0.000000 0.000000 3.364813 2.277725
+    ## [2,] 2.226863 5.094011 0.000000 0.000000 5.469322
+    ## [3,] 2.226863 2.166704 4.887945 3.951340 3.272103
+    ## [4,] 5.990491 4.978982 3.593868 5.331774 3.948061
+    ## [5,] 5.948110 4.062194 2.899177 1.023982 3.649314
+
+## Example: computepca()
+
+We can now compute a PCA analysis as a part of doing Kmeans. Within
+this, we will need to pass the mat_norm object we just created into the
+computepca() function. A few outputs of the pca function are shown
+below.
+
+``` r
+  utils::data(example_sce, package="analysiskmeans")
+  sce1 <- example_sce
+  results1 <- data_config(sce1)
+  sce1 <- results1$sce
+  mat_norm1 <- top_x_genes(sce1, n_top = 50)
+  pca1 <- computepca(mat_norm1)
+  pca1$sdev[1:5]
+```
+
+    ## [1] 2.517584 2.402654 2.197769 2.060160 1.984220
+
+## Example: kmeans()
+
+The kmeans function conducts clustering in an iterative fashion, going
+from inputted parameters of minimum k values to maximum k values. The
+km_list object contains a large amount of information about the
+clustering. The metrics object contains wss and average silhouette
+scores with corresponding to each k value in our range. An example of
+what metrics looks like is shown below.
+
+``` r
+  utils::data(example_sce, package="analysiskmeans")
+  sce <- example_sce
+  results <- data_config(sce)
+  sce <- results$sce
+  mat_norm <- top_x_genes(sce, n_top = 50)
+  pca <- computepca(mat_norm)
+  max_k <- 10
+  min_k <-5
+  outputs <- k_means(min_k = min_k, max_k=max_k, pca = pca)
+  metrics<-outputs$metrics
+  km_list <- outputs$km_list
+  metrics
+```
+
+    ##    k      wss avg_silhouette
+    ## 1  5 625.5026     0.06131297
+    ## 2  6 565.5828     0.06596026
+    ## 3  7 512.3719     0.06487671
+    ## 4  8 459.8210     0.06096352
+    ## 5  9 408.9954     0.06596343
+    ## 6 10 360.5383     0.06911235
+
+## Example: cluster_plot()
+
+Our cluster_plot() function takes outputs from the kmeans function and
+plots the data based on principal components. An example plot is shown
+above, and each cluster is differentiated by color. We plot the
+following based on an example selected k value. In this case we have
+chosen a value of 8 as an example.
+
+``` r
+plot <- cluster_plot(selected_k=8, km_list, pca, results$cell_type)
+```
+
+![](README_files/figure-gfm/cluster-1.png)<!-- -->
+
+## Using analysiskmeans in CLI
+
+The analysiskmeans package can also be accessed by the command line. A
+few example of prompts include the following:
+
+    analysiskmeans kmeans --help

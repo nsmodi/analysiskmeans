@@ -2,8 +2,7 @@
 library(SummarizedExperiment)
 library(SingleCellExperiment)
 
-#Example taken from https://inbre.ncgr.org/single-cell-workshop/bioconductor-singlecellexperiment.html documentation
-#I will customize this later I just want to see if it will work first
+#Example taken/adapted from https://inbre.ncgr.org/single-cell-workshop/bioconductor-singlecellexperiment.html documentation
 set.seed(42)
 num_genes <- 100
 num_cells <- 20 #Used to be 8

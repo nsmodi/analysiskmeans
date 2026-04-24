@@ -11,7 +11,8 @@
 
 
 computepca <- function(mat_norm){
-  pca <- stats::prcomp(t(mat_norm), scale. = TRUE, center = TRUE)
+
+  pca <- stats::prcomp(t(mat_norm),scale. = TRUE, center = TRUE)
 
   return(pca)
 }

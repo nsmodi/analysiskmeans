@@ -51,7 +51,7 @@ top_x_genes <- function(sce, n_top = 100, assay_name = "counts"){
 #' @param cell_type Corresponding cell type labels
 #' @param km_list List of K Means clustering results with various K values
 #' @param selected_k Selected value of K for clustering
-#' @param Metrics Silhouette scores
+#' @param metrics Silhouette scores
 #' @param evaluation ARI values for each K
 #'
 #' @return None
