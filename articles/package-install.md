@@ -1,0 +1,38 @@
+# Package Installation Guide
+
+## Installation
+
+You can install the development version of analysiskmeans from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("nsmodi/analysiskmeans")
+```
+
+Or you can also …
+
+``` r
+# library(devtools)
+# remotes::install_github("nsmodi/analysiskmeans")
+```
+
+## Troubleshooting
+
+This package depends on a multitude of other packages. If you are having
+issues with analysiskmeans, check your installation of the other
+dependencies listed below!
+
+- library(analysiskmeans)
+- library(utils)
+- library(stats)
+- library(ggplot2)
+- library(SummarizedExperiment)
+- library(BiocManager)
+- library(SingleCellExperiment)
+
+## Further Questions
+
+If you have further questions on the installation of analysiskmeans,
+please reach out to me directly at ‘<naamna.modi@stjude.org>’! I will be
+happy to help!

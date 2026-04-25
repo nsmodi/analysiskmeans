@@ -20,19 +20,13 @@ Or you can also …
 # remotes::install_github("nsmodi/analysiskmeans")
 ```
 
+\##Functions this package provides!
+
 ## Example: data_config()
 
 This is a basic example of how to use the data_config function to set up
 your SingleCellExperiment data so that it is usable for functionality in
 this package!
-
-``` r
-  library(analysiskmeans)
-  utils::data(example_sce, package="analysiskmeans")
-  sce <- example_sce
-  results <- data_config(sce)
-  sce <- results$sce
-```
 
 ## Example: top_x_genes()
 
@@ -126,13 +120,265 @@ chosen a value of 8 as an example.
 plot <- cluster_plot(selected_k=8, km_list, pca, results$cell_type)
 ```
 
-![](README_files/figure-gfm/cluster-1.png)
-
-## Using analysiskmeans in CLI
+![](README_files/figure-gfm/cluster-1.png) \## Using analysiskmeans in
+CLI
 
 The analysiskmeans package can also be accessed by the command line. A
-few example of prompts include the following:
+few example of prompts are shown below!
+
+To get started, if you are looking for the different commands you can
+use with this package, use the –help command.
 
 ``` R
-analysiskmeans kmeans --help
+analysiskmeans --help
+```
+
+If you are looking to retrieve an elbow plot for various Kmeans
+clustering iterations, the *elbow* command is the one to use! Here are
+the following methods to use with the elbow command:
+
+``` R
+Options:
+  -c, --counts <COUNTS>       Path to counts matrix (TSV/CSV, genes x samples)
+                              [default: ""] [type: string]
+  -gm, --genemeta <GENEMETA>  Path to sample gene metadata (TSV/CSV)
+                              [default: ""] [type: string]
+  -cm, --cellmeta <CELLMETA>  Path to sample cell metadata (TSV/CSV)
+                              [default: ""] [type: string]
+  -o, --output <OUTPUT>       Output directory [default: ""] [type: string]
+  -FALSE, --n-top <N-TOP>     Number of top variable genes
+                              [default: 50] [type: integer]
+  -mn, --min-k <MIN-K>        Minimum K Value [default: 5] [type: integer]
+  -mx, --max-k <MAX-K>        Number of top variable genes
+                              [default: 10] [type: integer]
+```
+
+If you are looking to retrieve clustering kmeans plots for various
+Kmeans clustering iterations, the *cluster* command is the one to use!
+Here are the following methods to use with the cluster command:
+
+``` R
+Options:
+  -c, --counts <COUNTS>           Path to counts matrix (TSV/CSV, genes x
+                                  samples)
+                                  [default: ""] [type: string]
+  -gm, --genemeta <GENEMETA>      Path to sample gene metadata (TSV/CSV)
+                                  [default: ""] [type: string]
+  -cm, --cellmeta <CELLMETA>      Path to sample cell metadata (TSV/CSV)
+                                  [default: ""] [type: string]
+  -o, --output <OUTPUT>           Output directory [default: ""] [type: string]
+  -FALSE, --n-top <N-TOP>         Number of top variable genes
+                                  [default: 50] [type: integer]
+  -mn, --min-k <MIN-K>            Minimum K Value [default: 5] [type: integer]
+  -mx, --max-k <MAX-K>            Number of top variable genes
+                                  [default: 10] [type: integer]
+  -mx, --selected-k <SELECTED-K>  A Selected K Value for Plotting
+                                  [default: 7] [type: integer]
+```
+
+Let’s get started with a few examples!
+
+Firstly, read_data_file is a helper function to load in a dataset in a
+csv/tsv format
+
+``` r
+library(SingleCellExperiment)
+```
+
+``` R
+## Warning: package 'SingleCellExperiment' was built under R version 4.5.2
+
+## Loading required package: SummarizedExperiment
+
+## Warning: package 'SummarizedExperiment' was built under R version 4.5.2
+
+## Loading required package: MatrixGenerics
+
+## Warning: package 'MatrixGenerics' was built under R version 4.5.2
+
+## Loading required package: matrixStats
+
+## Warning: package 'matrixStats' was built under R version 4.5.2
+
+## 
+## Attaching package: 'MatrixGenerics'
+
+## The following objects are masked from 'package:matrixStats':
+## 
+##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+##     colWeightedMeans, colWeightedMedians, colWeightedSds,
+##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+##     rowWeightedSds, rowWeightedVars
+
+## Loading required package: GenomicRanges
+
+## Warning: package 'GenomicRanges' was built under R version 4.5.2
+
+## Loading required package: stats4
+
+## Loading required package: BiocGenerics
+
+## Warning: package 'BiocGenerics' was built under R version 4.5.2
+
+## Loading required package: generics
+
+## 
+## Attaching package: 'generics'
+
+## The following objects are masked from 'package:base':
+## 
+##     as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,
+##     setequal, union
+
+## 
+## Attaching package: 'BiocGenerics'
+
+## The following objects are masked from 'package:stats':
+## 
+##     IQR, mad, sd, var, xtabs
+
+## The following objects are masked from 'package:base':
+## 
+##     anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+##     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+##     get, grep, grepl, is.unsorted, lapply, Map, mapply, match, mget,
+##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+##     rbind, Reduce, rownames, sapply, saveRDS, table, tapply, unique,
+##     unsplit, which.max, which.min
+
+## Loading required package: S4Vectors
+
+## 
+## Attaching package: 'S4Vectors'
+
+## The following object is masked from 'package:utils':
+## 
+##     findMatches
+
+## The following objects are masked from 'package:base':
+## 
+##     expand.grid, I, unname
+
+## Loading required package: IRanges
+
+## Warning: package 'IRanges' was built under R version 4.5.2
+
+## 
+## Attaching package: 'IRanges'
+
+## The following object is masked from 'package:grDevices':
+## 
+##     windows
+
+## Loading required package: Seqinfo
+
+## Warning: package 'Seqinfo' was built under R version 4.5.2
+
+## Loading required package: Biobase
+
+## Warning: package 'Biobase' was built under R version 4.5.2
+
+## Welcome to Bioconductor
+## 
+##     Vignettes contain introductory material; view with
+##     'browseVignettes()'. To cite Bioconductor, see
+##     'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+## 
+## Attaching package: 'Biobase'
+
+## The following object is masked from 'package:MatrixGenerics':
+## 
+##     rowMedians
+
+## The following objects are masked from 'package:matrixStats':
+## 
+##     anyMissing, rowMedians
+```
+
+``` r
+read_data_file <- function(path) {
+  ext <- tolower(tools::file_ext(path))
+  if (ext == "csv") {
+    utils::read.csv(path, row.names = 1, check.names = FALSE)
+  } else {
+    utils::read.table(path, sep = "\t", header = TRUE, row.names = 1,
+                      check.names = FALSE)
+  }
+}
+```
+
+The following example starts by constructing input files!
+
+``` r
+set.seed(42)
+num_genes <- 100
+num_cells <- 20 #Used to be 8
+raw_counts <- as.integer(rexp(num_genes*num_cells, rate = 0.1))
+raw_counts <- matrix(raw_counts, nrow = num_genes, ncol = num_cells)
+
+gene_metadata <- data.frame(
+  name = paste("Gene", 1:num_genes, sep = "_"),
+  length = as.integer(rnorm(num_genes, mean = 10000, sd = 500))
+)
+
+cell_metadata <- data.frame(
+  names = paste("Cell", 1:num_cells, sep = "_"),
+  batch = rep(1:2, each = num_cells/2),
+  label = rep(c("xylem", "phloem"), times = num_cells/2)
+)
+```
+
+We can continue by writing the inputs into files in a tests/cli folder!
+
+``` r
+#reading the files and beginning the CLI simulation
+counts_df <- read_data_file(paste(getwd(),"/tests/cli/counts_df.csv", sep = ""))
+genemeta_df <- read_data_file(paste(getwd(),"/tests/cli/genemeta_df.csv", sep = ""))
+cellmeta_df <- read_data_file(paste(getwd(),"/tests/cli/cellmeta_df.csv", sep = ""))
+```
+
+Next, we can make an SingleCellExperiment object with the dataframes
+from the files!
+
+``` r
+sce1 <- SingleCellExperiment(
+  assays = list(counts = as.matrix(counts_df)),
+  rowData = genemeta_df,
+  colData = cellmeta_df
+)
+```
+
+After the file is fetched, and the object is saved, we can run our
+functions and start conducting the analysis! We can start by using the
+elbow plot function! We are also saving our elbow plot in an image in
+our repository.
+
+``` r
+results <- data_config(sce1)
+sce1 <- results$sce
+mat_norm <- top_x_genes(sce1, n_top = 50)
+pca <- computepca(mat_norm)
+max_k <- 10
+min_k = 5
+outputs <- k_means(min_k = min_k, max_k=max_k, pca = pca)
+metrics<-outputs$metrics
+grDevices::png(paste(getwd(),"/tests/cli/plots/elbowplot.png", sep = ""), width = 8, height = 6, units = "in", res = 300)
+elbow_plot(metrics)
+message("Saved!")
+```
+
+``` R
+## Saved!
 ```
