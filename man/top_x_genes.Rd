@@ -21,5 +21,9 @@ Select n top variable genes and data configuration
 }
 \examples{
 library(analysiskmeans)
-data("example_sce")
+data(example_sce)
+SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce)) #Line taken from Claude AI - Debug
+sce <- example_sce
+top_x_genes(sce)
+
 }

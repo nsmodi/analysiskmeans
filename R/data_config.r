@@ -7,13 +7,19 @@
 #' @return List of A SingleCellExperiment subset, List of cell type labels and Log Normalized SingleCellExperiment object
 #'
 #' @export
-#'
+#' @examples
+#' # Assuming 'sce' is a SummarizedExperiment
+#' library(analysiskmeans)
+#' data(example_sce)
+#' sce <- example_sce
+#' analysiskmeans::data_config(sce)
+
 
 
 data_config <- function(sce){
   SummarizedExperiment::assays(sce) <- list(counts = SingleCellExperiment::counts(sce))
   cell_type <- SummarizedExperiment::colData(sce)['label']
-  #SummarizedExperiment::colData(sce) <- SummarizedExperiment::colData(sce)[, "label", drop = FALSE]
+
   colnames(SummarizedExperiment::colData(sce)) <- "cell_type"
   counts_mat <- SingleCellExperiment::counts(sce)
   sce <- scuttle::logNormCounts(sce)
@@ -35,7 +41,11 @@ data_config <- function(sce){
 #' @export
 #' @examples
 #' library(analysiskmeans)
-#' data("example_sce")
+#' data(example_sce)
+#' SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce)) #Line taken from Claude AI - Debug
+#' sce <- example_sce
+#' top_x_genes(sce)
+#'
 
 
 top_x_genes <- function(sce, n_top = 100, assay_name = "counts"){

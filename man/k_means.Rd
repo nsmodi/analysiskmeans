@@ -7,6 +7,8 @@
 k_means(min_k, max_k, n_starts = 25, seed = 42, pca)
 }
 \arguments{
+\item{min_k}{The min amount k value you wish to start at}
+
 \item{max_k}{The max amount k value you wish to go up to}
 
 \item{n_starts}{Number of initial sets}
@@ -20,4 +22,14 @@ List Average silhouette scores and of K Means clustering results with various K 
 }
 \description{
 Conduct K Means Clustering
+}
+\examples{
+library(analysiskmeans)
+data(example_sce)
+SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+sce <- example_sce
+results <- data_config(sce)
+mat_norm <- top_x_genes(results$sce, n_top = 50)
+pca <- computepca(mat_norm)
+k_means(4, 9, n_starts = 25, seed = 42, pca)
 }

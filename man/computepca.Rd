@@ -15,3 +15,12 @@ Resulting PCA matrix
 \description{
 Compute Principal Component Analysis
 }
+\examples{
+library(analysiskmeans)
+data(example_sce)
+SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+sce <- example_sce
+results <- data_config(sce)
+mat_norm <- top_x_genes(results$sce, n_top = 50)
+computepca(mat_norm)
+}

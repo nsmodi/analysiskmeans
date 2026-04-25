@@ -26,6 +26,17 @@ elbow_plot <- function(metrics){
 #' @param cell_type Cell type labels provided
 #' @return Resulting Cluster Plot
 #' @export
+#' @examples
+#' library(analysiskmeans)
+#' data(example_sce)
+#' SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+#' sce <- example_sce
+#' results <- data_config(sce)
+#' mat_norm <- top_x_genes(results$sce, n_top = 50)
+#' pca <- computepca(mat_norm)
+#' outputs <- k_means(4, 9, n_starts = 25, seed = 42, pca)
+#' cluster_plot(7, outputs$km_list, pca, results$cell_type)
+
 cluster_plot <- function(selected_k, km_list, pca, cell_type){
   km_sel <- km_list[[as.character(selected_k)]]
   scatter_df <- data.frame(
@@ -37,7 +48,7 @@ cluster_plot <- function(selected_k, km_list, pca, cell_type){
     ggplot2::geom_point(size = 0.6, alpha = 0.6) +
     ggplot2::theme_bw(base_size = 14) +
     ggplot2::labs(title = paste0("K-means (k=", selected_k, ") on PCA"))
-    print(p_scatter)
-    return(p_scatter)
+  print(p_scatter)
+  return(p_scatter)
 
 }

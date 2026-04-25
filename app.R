@@ -2,6 +2,8 @@ library(shiny)
 library(analysiskmeans)
 data(example_sce)
 
+#My Shiny App that unfortunately never resulted in a finished product! Maybe One day!!
+
 ui <- fluidPage(
   theme = bslib::bs_theme(bootswatch = "flatly"),
 

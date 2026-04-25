@@ -7,6 +7,8 @@
 evaluation_metrics(min_k, max_k, km_list, cell_type)
 }
 \arguments{
+\item{min_k}{The min amount k value you wish to start at}
+
 \item{max_k}{The max amount k value you wish to go up to}
 
 \item{km_list}{List of K Means clustering results with various K values}

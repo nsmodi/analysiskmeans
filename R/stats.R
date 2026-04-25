@@ -1,15 +1,24 @@
 
 #' Compute Gap Statistic for each K
 #'
-#' @param pca_mat PCA matrix
+#' @param pca PCA matrix
 #' @param n_starts Number of initial sets
 #' @param max_k The max amount k value you wish to go up to
 #' @param metrics List of silhouette scores
 #'
 #'
-#' @return Table of Gap statistic values for each K
+#' @return Table of Gap statistic values for each K starting at a minimum set of 5
 #' @export
-#'
+#' @examples
+#' library(analysiskmeans)
+#' data(example_sce)
+#' SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+#' sce <- example_sce
+#' results <- data_config(sce)
+#' mat_norm <- top_x_genes(results$sce, n_top = 50)
+#' pca <- computepca(mat_norm)
+#' outputs <- k_means(5, 9, n_starts = 25, seed = 42, pca)
+#' gap_statistic(pca, n_starts=25, 9, outputs$metrics)
 
 
 
@@ -24,7 +33,7 @@ gap_statistic <- function(pca, n_starts=25, max_k, metrics){
   return(gap_tab)
 }
 #' Compute ARI Values for each K
-#'
+#' @param min_k The min amount k value you wish to start at
 #' @param max_k The max amount k value you wish to go up to
 #' @param km_list List of K Means clustering results with various K values
 #' @param cell_type Corresponding cell type labels

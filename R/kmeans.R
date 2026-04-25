@@ -7,7 +7,14 @@
 #'
 #' @return Resulting PCA matrix
 #' @export
-#'
+#' @examples
+#' library(analysiskmeans)
+#' data(example_sce)
+#' SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+#' sce <- example_sce
+#' results <- data_config(sce)
+#' mat_norm <- top_x_genes(results$sce, n_top = 50)
+#' computepca(mat_norm)
 
 
 computepca <- function(mat_norm){
@@ -19,6 +26,7 @@ computepca <- function(mat_norm){
 
 #' Conduct K Means Clustering
 #'
+#' @param min_k The min amount k value you wish to start at
 #' @param max_k The max amount k value you wish to go up to
 #' @param n_starts Number of initial sets
 #' @param seed Random seed for reproducibility
@@ -27,6 +35,15 @@ computepca <- function(mat_norm){
 #'
 #' @return List Average silhouette scores and of K Means clustering results with various K values
 #' @export
+#' @examples
+#' library(analysiskmeans)
+#' data(example_sce)
+#' SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+#' sce <- example_sce
+#' results <- data_config(sce)
+#' mat_norm <- top_x_genes(results$sce, n_top = 50)
+#' pca <- computepca(mat_norm)
+#' k_means(4, 9, n_starts = 25, seed = 42, pca)
 
 k_means <- function(min_k, max_k, n_starts = 25, seed = 42, pca){
   pca_mat <- pca$x[, 1:20]  # first 20 PCs for clustering

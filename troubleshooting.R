@@ -1,3 +1,7 @@
+
+#This file was created for the sole purpose in aiding Naamna's troubleshooting
+#It is kept in this as a reference for examples of running the code!
+
 utils::data(example_sce, package="analysiskmeans")
 sce <- example_sce
 results <- data_config(sce)
@@ -35,3 +39,32 @@ list.files(output_dir)
 expect_true(file.exists(paste(c(getwd(), "/kmeans_output", "/cluster_assignments.tsv"), collapse = "")))
 expect_true(file.exists(paste(c(getwd(), "/kmeans_output", "/kmeans_metrics.tsv"), collapse = "")))
 expect_true(file.exists(paste(c(getwd(), "/kmeans_output", "/cluster_evaluation.tsv"), collapse = "")))
+
+#---
+
+utils::data(example_sce, package="analysiskmeans")
+sce <- example_sce
+results <- data_config(sce)
+sce <- results$sce
+mat_norm <- top_x_genes(sce, n_top = 50)
+pca <- computepca(mat_norm)
+max_k <- 10
+outputs <- k_means(min_k = 5, max_k=max_k, pca = pca)
+metrics<-outputs$metrics
+km_list <- outputs$km_list
+
+#--
+selected_k=8
+cell_type <- results$cell_type
+km_sel <- km_list[[as.character(selected_k)]]
+scatter_df <- data.frame(
+  PC1 = pca$x[, 1], PC2 = pca$x[, 2],
+  cluster = base::factor(km_sel$cluster),
+  cell_type = cell_type
+)
+p_scatter <- ggplot2::ggplot(scatter_df, ggplot2::aes(x = PC1, y = PC2, color = cluster)) +
+  ggplot2::geom_point(size = 0.6, alpha = 0.6) +
+  ggplot2::theme_bw(base_size = 14) +
+  ggplot2::labs(title = paste0("K-means (k=", selected_k, ") on PCA"))
+print(p_scatter)
+

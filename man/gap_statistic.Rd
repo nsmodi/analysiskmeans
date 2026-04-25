@@ -7,17 +7,28 @@
 gap_statistic(pca, n_starts = 25, max_k, metrics)
 }
 \arguments{
+\item{pca}{PCA matrix}
+
 \item{n_starts}{Number of initial sets}
 
 \item{max_k}{The max amount k value you wish to go up to}
 
 \item{metrics}{List of silhouette scores}
-
-\item{pca_mat}{PCA matrix}
 }
 \value{
-Table of Gap statistic values for each K
+Table of Gap statistic values for each K starting at a minimum set of 5
 }
 \description{
 Compute Gap Statistic for each K
+}
+\examples{
+library(analysiskmeans)
+data(example_sce)
+SingleCellExperiment::logcounts(example_sce) <- log1p(SingleCellExperiment::counts(example_sce))#Line taken from Claude AI - Debug
+sce <- example_sce
+results <- data_config(sce)
+mat_norm <- top_x_genes(results$sce, n_top = 50)
+pca <- computepca(mat_norm)
+outputs <- k_means(5, 9, n_starts = 25, seed = 42, pca)
+gap_statistic(pca, n_starts=25, 9, outputs$metrics)
 }

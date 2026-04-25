@@ -15,3 +15,10 @@ List of A SingleCellExperiment subset, List of cell type labels and Log Normaliz
 \description{
 Configure and Normalize input data
 }
+\examples{
+# Assuming 'sce' is a SummarizedExperiment
+library(analysiskmeans)
+data(example_sce)
+sce <- example_sce
+analysiskmeans::data_config(sce)
+}
