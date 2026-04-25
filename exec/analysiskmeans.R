@@ -1,7 +1,8 @@
 #!/usr/bin/env Rapp
 #| name: analysiskmeans
 #| title: analysiskmeans Kmeans Tool
-#| description: Kmeans analysis for SingleCellExperiment data.
+#| description: Welcome to analysiskmeans! In this package, there are various useful functions to assist, conduct, and plot Kmeans Clustering! This is all done with a simple input of a SingleCellExperiment.
+#| ---
 
 suppressPackageStartupMessages({
   library(analysiskmeans)
@@ -9,6 +10,7 @@ suppressPackageStartupMessages({
   library(stats)
   library(ggplot2)
   library(SummarizedExperiment)
+  library(SingleCellExperiment)
 })
 
 # Helper to read TSV/CSV (not exported; kept in CLI script)
@@ -26,28 +28,44 @@ read_data_file <- function(path) {
 switch(
   "",
 
-  #| title: Create an Elbow Plot
-  #| description: Create an elbow_plot on a SingleCellExperiment and export results.
+  #| title: Creation of elbow plot
+  #| description: Create an elbow_plot of a SingleCellExperiment and export results.
   elbow = {
+    #| name: counts
+    #| type: string
     #| description: Path to counts matrix (TSV/CSV, genes x samples)
     #| short: c
     counts <- ""
-
+    #| name: genemeta
+    #| type: string
     #| description: Path to sample gene metadata (TSV/CSV)
-    #| short: m
+    #| short: gm
     genemeta <- ""
-
+    #| name: cellmeta
+    #| type: string
     #| description: Path to sample cell metadata (TSV/CSV)
-    #| short: m
+    #| short: cm
     cellmeta <- ""
-
+    #| name: output
+    #| type: string
     #| description: Output directory
     #| short: o
     output <- ""
-
+    #| name: n_top
+    #| type: integer
     #| description: Number of top variable genes
     #| short: n
     n_top <- 50L
+    #| name: min_k
+    #| type: integer
+    #| description: Minimum K Value
+    #| short: mn
+    min_k <- 5L
+    #| name: max_k
+    #| type: integer
+    #| description: Number of top variable genes
+    #| short: mx
+    max_k <- 10L
 
     # Validation
     if (counts == "" || genemeta == "" || cellmeta == "" || output == "") {
@@ -62,7 +80,7 @@ switch(
     if (!file.exists(cellmeta)) {
       stop("File not found: ", cellmeta, call. = FALSE)
     }
-
+    print(2)
     if (!dir.exists(output)) dir.create(output, recursive = TRUE)
 
     # Read inputs
@@ -70,43 +88,27 @@ switch(
     genemeta_df <- read_data_file(genemeta)
     cellmeta_df <- read_data_file(cellmeta)
 
-#    se <- SummarizedExperiment(
-#      assays  = list(counts = as.matrix(counts_df)),
-#      colData = meta_df
-#    )
 
-    sce <- SingleCellExperiment(
+    sce <- SingleCellExperiment::SingleCellExperiment(
       assays = list(counts = as.matrix(counts_df)),
       rowData = genemeta_df,
       colData = cellmeta_df
     )
 
-    #result <- run_pca(se, n_top = n_top, log_transform = log_transform)
+
     results <- data_config(sce)
     sce <- results$sce
     mat_norm <- top_x_genes(sce, n_top = n_top)
     pca <- computepca(mat_norm)
     max_k <- max_k
-    min_k = min_k
+    min_k <- min_k
     outputs <- k_means(min_k = min_k, max_k=max_k, pca = pca)
     metrics<-outputs$metrics
-    output <- elbow_plot(metrics)
-    plot_file <- file.path(output, "pca_plot.png")
-    png(plot_file, width = 8, height = 6, units = "in", res = 300)
-    dev.off()
-    message("Saved: ", plot_file)
+    grDevices::png(paste(getwd(),"/tests/cli/plots/elbowplot.png", sep = ""), width = 8, height = 6, units = "in", res = 300)
+    analysiskmeans::elbow_plot(metrics)
 
-
-    #if (color_by != "") {
-    #  plot_file <- file.path(output, "pca_plot.png")
-    #  p <- plot_pca(result, color_by = color_by)
-    #  png(plot_file, width = 8, height = 6, units = "in", res = 300)
-    #  print(p)
-    #  dev.off()
-    #  message("Saved: ", plot_file)
-    #}
 
     message("Done.")
-  }
-)
+  })
+
 
