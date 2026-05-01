@@ -6,6 +6,7 @@ You can install the development version of analysiskmeans from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("nsmodi/analysiskmeans")
 ```
@@ -13,6 +14,7 @@ pak::pak("nsmodi/analysiskmeans")
 Or you can also …
 
 ``` r
+
 # library(devtools)
 # remotes::install_github("nsmodi/analysiskmeans")
 ```

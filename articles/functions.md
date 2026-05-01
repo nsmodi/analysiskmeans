@@ -24,6 +24,7 @@ fill in a parameter value for n_top, 50 will be the default value. A
 small portion of this subset is shown below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce <- example_sce
   results <- data_config(sce)
@@ -38,6 +39,7 @@ small portion of this subset is shown below.
     ## See help("Deprecated")
 
 ``` r
+
   sce <- results$sce
   mat_norm <- top_x_genes(sce, n_top = 50)
 mat_norm[1:5,1:5]
@@ -58,6 +60,7 @@ computepca() function. A few outputs of the pca function are shown
 below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce1 <- example_sce
   results1 <- data_config(sce1)
@@ -72,6 +75,7 @@ below.
     ## See help("Deprecated")
 
 ``` r
+
   sce1 <- results1$sce
   mat_norm1 <- top_x_genes(sce1, n_top = 50)
   pca1 <- computepca(mat_norm1)
@@ -90,6 +94,7 @@ scores with corresponding to each k value in our range. An example of
 what metrics looks like is shown below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce <- example_sce
   results <- data_config(sce)
@@ -104,6 +109,7 @@ what metrics looks like is shown below.
     ## See help("Deprecated")
 
 ``` r
+
   sce <- results$sce
   mat_norm <- top_x_genes(sce, n_top = 50)
   pca <- computepca(mat_norm)
@@ -132,6 +138,7 @@ following based on an example selected k value. In this case we have
 chosen a value of 8 as an example.
 
 ``` r
+
 plot <- cluster_plot(selected_k=8, km_list, pca, results$cell_type)
 ```
 

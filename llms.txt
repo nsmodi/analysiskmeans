@@ -9,6 +9,7 @@ You can install the development version of analysiskmeans from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("nsmodi/analysiskmeans")
 ```
@@ -16,6 +17,7 @@ pak::pak("nsmodi/analysiskmeans")
 Or you can also …
 
 ``` r
+
 # library(devtools)
 # remotes::install_github("nsmodi/analysiskmeans")
 ```
@@ -36,6 +38,7 @@ fill in a parameter value for n_top, 50 will be the default value. A
 small portion of this subset is shown below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce <- example_sce
   results <- data_config(sce)
@@ -61,6 +64,7 @@ computepca() function. A few outputs of the pca function are shown
 below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce1 <- example_sce
   results1 <- data_config(sce1)
@@ -84,6 +88,7 @@ scores with corresponding to each k value in our range. An example of
 what metrics looks like is shown below.
 
 ``` r
+
   utils::data(example_sce, package="analysiskmeans")
   sce <- example_sce
   results <- data_config(sce)
@@ -117,6 +122,7 @@ following based on an example selected k value. In this case we have
 chosen a value of 8 as an example.
 
 ``` r
+
 plot <- cluster_plot(selected_k=8, km_list, pca, results$cell_type)
 ```
 
@@ -182,6 +188,7 @@ Firstly, read_data_file is a helper function to load in a dataset in a
 csv/tsv format
 
 ``` r
+
 library(SingleCellExperiment)
 ```
 
@@ -308,6 +315,7 @@ library(SingleCellExperiment)
 ```
 
 ``` r
+
 read_data_file <- function(path) {
   ext <- tolower(tools::file_ext(path))
   if (ext == "csv") {
@@ -322,6 +330,7 @@ read_data_file <- function(path) {
 The following example starts by constructing input files!
 
 ``` r
+
 set.seed(42)
 num_genes <- 100
 num_cells <- 20 #Used to be 8
@@ -343,6 +352,7 @@ cell_metadata <- data.frame(
 We can continue by writing the inputs into files in a tests/cli folder!
 
 ``` r
+
 #reading the files and beginning the CLI simulation
 counts_df <- read_data_file(paste(getwd(),"/tests/cli/counts_df.csv", sep = ""))
 genemeta_df <- read_data_file(paste(getwd(),"/tests/cli/genemeta_df.csv", sep = ""))
@@ -353,6 +363,7 @@ Next, we can make an SingleCellExperiment object with the dataframes
 from the files!
 
 ``` r
+
 sce1 <- SingleCellExperiment(
   assays = list(counts = as.matrix(counts_df)),
   rowData = genemeta_df,
@@ -366,6 +377,7 @@ elbow plot function! We are also saving our elbow plot in an image in
 our repository.
 
 ``` r
+
 results <- data_config(sce1)
 sce1 <- results$sce
 mat_norm <- top_x_genes(sce1, n_top = 50)

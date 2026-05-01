@@ -55,6 +55,7 @@ Firstly, let’s install analysiskmeans. Also, read_data_file is a helper
 function to load in a dataset in a csv/tsv format
 
 ``` r
+
 read_data_file <- function(path) {
   ext <- tolower(tools::file_ext(path))
   if (ext == "csv") {
@@ -69,6 +70,7 @@ read_data_file <- function(path) {
 The following example starts by constructing input files!
 
 ``` r
+
 set.seed(42)
 num_genes <- 100
 num_cells <- 20 #Used to be 8
@@ -90,6 +92,7 @@ cell_metadata <- data.frame(
 We can continue by writing the inputs into files in a tests/cli folder!
 
 ``` r
+
 #reading the files and beginning the CLI simulation 
 
 #Due to the vignette structure
@@ -103,6 +106,7 @@ Next, we can make an SingleCellExperiment object with the dataframes
 from the files!
 
 ``` r
+
 sce1 <- SingleCellExperiment(
   assays = list(counts = as.matrix(counts_df)),
   rowData = genemeta_df,
@@ -116,6 +120,7 @@ elbow plot function! We are also saving our elbow plot in an image in
 our repository.
 
 ``` r
+
 results <- analysiskmeans::data_config(sce1)
 ```
 
@@ -128,6 +133,7 @@ results <- analysiskmeans::data_config(sce1)
     ## See help("Deprecated")
 
 ``` r
+
 sce1 <- results$sce
 mat_norm <- analysiskmeans::top_x_genes(sce1, n_top = 50)
 pca <- analysiskmeans::computepca(mat_norm)
