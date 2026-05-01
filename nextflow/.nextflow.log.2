@@ -1,0 +1,76 @@
+May-01 00:10:05.076 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf
+May-01 00:10:05.373 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+May-01 00:10:05.436 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/naamna-modi/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+May-01 00:10:05.513 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+May-01 00:10:05.516 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+May-01 00:10:05.524 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+May-01 00:10:05.572 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+May-01 00:10:06.050 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+May-01 00:10:06.138 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/naamna-modi/homework2/analysiskmeans/nextflow/nextflow.config
+May-01 00:10:06.148 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/naamna-modi/homework2/analysiskmeans/nextflow/nextflow.config
+May-01 00:10:06.160 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+May-01 00:10:06.217 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+May-01 00:10:07.214 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+May-01 00:10:07.216 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+May-01 00:10:07.257 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/naamna-modi/.nextflow/secrets/store.json
+May-01 00:10:07.267 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@4f9a6c2d] - activable => nextflow.secret.LocalSecretsProvider@4f9a6c2d
+May-01 00:10:07.303 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+May-01 00:10:07.345 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [big_mendel] DSL2 - revision: 855969c76a
+May-01 00:10:07.665 [main] DEBUG nextflow.Session - Session UUID: db9c5dea-7bdd-47d3-97eb-681d20ebfdc8
+May-01 00:10:07.666 [main] DEBUG nextflow.Session - Run name: big_mendel
+May-01 00:10:07.668 [main] DEBUG nextflow.Session - Executor pool size: 4
+May-01 00:10:07.699 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+May-01 00:10:07.720 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-01 00:10:07.794 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11173
+  Created: 10-02-2026 15:17 UTC 
+  System: Linux 6.17.0-1011-azure
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.6+9-b895.97
+  Encoding: UTF-8 (UTF-8)
+  Process: 1661194@sciapp-students [10.2.0.4]
+  CPUs: 4 - Mem: 15.6 GB (1.6 GB) - Swap: 0 (0)
+May-01 00:10:07.850 [main] DEBUG nextflow.Session - Work-dir: /home/naamna-modi/homework2/analysiskmeans/nextflow/work [ext2/ext3]
+May-01 00:10:07.851 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/naamna-modi/homework2/analysiskmeans/nextflow/bin
+May-01 00:10:07.874 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+May-01 00:10:07.907 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+May-01 00:10:07.919 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+May-01 00:10:08.022 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+May-01 00:10:08.053 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+May-01 00:10:08.223 [main] DEBUG nextflow.Session - Session start
+May-01 00:10:08.237 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+May-01 00:10:09.069 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+May-01 00:10:09.583 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-01 00:10:09.585 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-01 00:10:09.615 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+May-01 00:10:09.644 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.6 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+May-01 00:10:09.653 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+May-01 00:10:09.799 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'kmeans_elbow': maxForks=0; fair=false; array=0
+May-01 00:10:09.962 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-01 00:10:09.963 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-01 00:10:09.966 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'kmeans_clustering': maxForks=0; fair=false; array=0
+May-01 00:10:09.985 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: kmeans_elbow, kmeans_clustering
+May-01 00:10:09.992 [main] DEBUG nextflow.Session - Igniting dataflow network (5)
+May-01 00:10:10.013 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > kmeans_elbow
+May-01 00:10:10.019 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > kmeans_clustering
+May-01 00:10:10.021 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  _nf_script_eb0a1078c0ba6052: /home/naamna-modi/homework2/analysiskmeans/nextflow/modules/kmeans_clustering.nf
+  Main: /home/naamna-modi/homework2/analysiskmeans/nextflow/main.nf
+May-01 00:10:10.022 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+May-01 00:10:10.025 [main] DEBUG nextflow.Session - Session await
+May-01 00:10:10.792 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-01 00:10:10.800 [Task submitter] INFO  nextflow.Session - [d6/113154] Submitted process > kmeans_elbow (1)
+May-01 00:10:10.862 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-01 00:10:10.865 [Task submitter] INFO  nextflow.Session - [55/600a80] Submitted process > kmeans_clustering (1)
+May-01 00:10:28.777 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: kmeans_elbow (1); status: COMPLETED; exit: 0; error: -; workDir: /home/naamna-modi/homework2/analysiskmeans/nextflow/work/d6/11315458a8458895924eb81198d461]
+May-01 00:10:28.780 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-01 00:10:28.860 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: kmeans_clustering (1); status: COMPLETED; exit: 0; error: -; workDir: /home/naamna-modi/homework2/analysiskmeans/nextflow/work/55/600a80d40ef88e69ff816efc9e253b]
+May-01 00:10:28.862 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-01 00:10:28.886 [main] DEBUG nextflow.Session - Session await > all processes finished
+May-01 00:10:28.961 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+May-01 00:10:28.962 [main] DEBUG nextflow.Session - Session await > all barriers passed
+May-01 00:10:28.973 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+May-01 00:10:28.977 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+May-01 00:10:29.010 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=35.9s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+May-01 00:10:29.197 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+May-01 00:10:29.232 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+May-01 00:10:29.235 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

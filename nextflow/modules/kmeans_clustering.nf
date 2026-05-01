@@ -1,21 +1,44 @@
 
 
-process kmeans_clustering {
-
+process kmeans_elbow{
+    container "analysiskmeans:0.0.2"
+    publishDir 'results', mode: 'copy'
     input:
-    val counts
-    val cellmeta
-    val genemeta
+    path counts
+    path cellmeta
+    path genemeta
     val mn
     val mx
 
     output:
-    path '/tests/cli/plots/'
+    path 'tests/cli/plots/elbowplot.png'
 
     script:
-    
-    analysiskmeans elbow -c ${counts} -cm${cellmeta} -gm ${genemeta} -o ${output} -mn 5 -mx 10 
-    analysiskmeans cluster -c ${counts} -cm${cellmeta} -gm ${genemeta} -o ${output} -mn 5 -mx 10
+    """
+    mkdir -p tests/cli/plots/
+    /usr/local/bin/analysiskmeans elbow -c ${counts} -cm ${cellmeta} -gm ${genemeta} -o tests/cli/plots/ -mn ${mn} -mx ${mx} 
+    """
 
     
+}
+
+process kmeans_clustering {
+    container "analysiskmeans:0.0.2"
+    publishDir 'results', mode: 'copy'
+    input:
+    path counts
+    path cellmeta
+    path genemeta
+    val mn
+    val mx
+    val sk
+
+    output:
+    path 'tests/cli/plots/clusterplot.png'
+
+    script:
+    """
+    mkdir -p tests/cli/plots/
+    /usr/local/bin/analysiskmeans cluster -c ${counts} -cm ${cellmeta} -gm ${genemeta} -o tests/cli/plots/ -mn ${mn} -mx ${mx} -sk ${sk}
+    """
 }
