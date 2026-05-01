@@ -48,5 +48,4 @@ mat_norm <- top_x_genes(results$sce, n_top = 50)
 pca <- computepca(mat_norm)
 outputs <- k_means(4, 9, n_starts = 25, seed = 42, pca)
 cluster_plot(7, outputs$km_list, pca, results$cell_type)
-
 ```

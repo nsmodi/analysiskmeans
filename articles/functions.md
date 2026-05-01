@@ -141,5 +141,3 @@ chosen a value of 8 as an example.
 
 plot <- cluster_plot(selected_k=8, km_list, pca, results$cell_type)
 ```
-
-![](functions_files/figure-html/cluster-1.png)
