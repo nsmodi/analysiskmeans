@@ -91,6 +91,7 @@ outputs <- k_means(min_k = min_k, max_k=max_k, pca = pca)
 metrics<-outputs$metrics
 grDevices::png(paste(getwd(),"/tests/cli/plots/elbowplot.png", sep = ""), width = 8, height = 6, units = "in", res = 300)
 elbow_plot(metrics)
+grDevices::dev.off()
 message("Saved!")
 
 #My Personal TEST Command is the following:
@@ -142,5 +143,6 @@ km_list <- outputs$km_list
 #Save the plot in the proper plots directory
 grDevices::png(paste(getwd(),"/tests/cli/plots/clusterplot.png", sep = ""), width = 8, height = 6, units = "in", res = 300)
 analysiskmeans::cluster_plot(selected_k=8, km_list, pca, results$cell_type)
+grDevices::dev.off()
 #Message is successfully prompted!
 message("Saved!")
