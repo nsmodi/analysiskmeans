@@ -44,8 +44,9 @@ cluster_plot <- function(selected_k, km_list, pca, cell_type){
     cluster = base::factor(km_sel$cluster),
     cell_type = cell_type
   )
+  grDevices::graphics.off()
   p_scatter <- ggplot2::ggplot(scatter_df, ggplot2::aes(x = PC1, y = PC2, color = cluster)) +
-    ggplot2::geom_point(size = 0.6, alpha = 0.6) +
+    ggplot2::geom_point(size = 3, alpha = 0.6) +
     ggplot2::theme_bw(base_size = 14) +
     ggplot2::labs(title = paste0("K-means (k=", selected_k, ") on PCA"))
   print(p_scatter)
