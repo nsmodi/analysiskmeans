@@ -49,7 +49,8 @@ This will run both your workflow processes at the same time, independently. In m
 
 The resulting plots will be saved in the results/ directory in the nextflow/ directory. 
 
-
+## Pipeline Acknowledgements 
+Resources used in order to develop this Nextflow Pipeline included ABDS Lecture Materials as well as Claude AI. 
 
 
 
